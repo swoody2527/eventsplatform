@@ -7,16 +7,18 @@ import "./firebase.js"
 import LandingPage from './components/LandingPage.jsx'
 import SignIn from './components/SignIn.jsx'
 import SignUp from './components/SignUp.jsx'
+import StaffSignIn from './components/StaffSignIn.jsx'
 
 function App() {
 
   return (
     <main>
-      <Link to="/"><h1>Events Platform</h1></Link>
+      <Link to="/"><h1>FilmFizz</h1></Link>
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path='/authenticate' element={<SignIn/>}></Route>
         <Route path='/usersignup' element={<SignUp/>}></Route>
+        <Route path='/authenticate-staff' element={<StaffSignIn/>}></Route>
       </Routes>
     </main>
   )

@@ -4,14 +4,13 @@ import { Link } from 'react-router-dom'
 function LandingPage() {
   return (
     <section>
-    <h1>Welcome to the Events Platform</h1>
+    <h1>Welcome to FilmFizz</h1>
+    <h3>The No. 1 place for social film gatherings and screenings!</h3>
     <h2>Already a member?</h2>
     <Link to="/authenticate"><button>Sign In</button></Link>
     <h2>Looking to get started?</h2>
     <Link to="/usersignup"><button>Sign Up</button></Link>
 
-    <h2>Staff?</h2>
-    <button>Staff Login</button>
     </section>
   )
 }
