@@ -12,6 +12,7 @@ function App() {
 
   return (
     <main>
+      <Link to="/"><h1>Events Platform</h1></Link>
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path='/authenticate' element={<SignIn/>}></Route>
