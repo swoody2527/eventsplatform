@@ -14,7 +14,7 @@ function App() {
 
   return (
     <main>
-      <Link to="/"><h1>FilmFizz</h1></Link>
+      <Link to="/"><h1>FilmFizzy</h1></Link>
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path='/authenticate' element={<SignIn/>}></Route>
