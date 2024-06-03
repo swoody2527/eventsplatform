@@ -3,11 +3,14 @@ import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { getAuth, signInWithEmailAndPassword} from 'firebase/auth'
 import app from '../firebase.js'
 import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore'
+import { StaffContext } from '../contexts/StaffContext.jsx'
 
 function StaffSignIn() {
   const navigate = useNavigate()
   
   const database = getFirestore(app)
+
+  const { loginStaff } = useContext(StaffContext)
 
   
   const auth = getAuth()
@@ -27,6 +30,7 @@ function StaffSignIn() {
       if (!querySnapshot.empty) {
         // Email exists in the "staff" collection
         await signInWithEmailAndPassword(auth, email, password);
+        loginStaff(email)
         setError(null);
         navigate("/menu");
       } else {
