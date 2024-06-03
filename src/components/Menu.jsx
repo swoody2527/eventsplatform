@@ -7,13 +7,14 @@ function Menu() {
 
 const auth = getAuth()
 const [uid, setUid] = useState("")
-const { staff } = useContext(StaffContext)
+const { staff, logoutStaff } = useContext(StaffContext)
 
 console.log(staff)
 const navigate = useNavigate()
 
 const handleLogout = (e) => {
   e.preventDefault()
+  logoutStaff()
    signOut(auth)
    .then(() => {
     navigate("/")
