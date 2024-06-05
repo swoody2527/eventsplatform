@@ -9,7 +9,6 @@ const auth = getAuth()
 const [uid, setUid] = useState("")
 const { staff, logoutStaff } = useContext(StaffContext)
 
-console.log(staff)
 const navigate = useNavigate()
 
 const handleLogout = (e) => {
