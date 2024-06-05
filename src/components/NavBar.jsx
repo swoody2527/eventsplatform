@@ -4,24 +4,13 @@ import { getAuth } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 
 function NavBar() {
-
-    const auth = getAuth(app)
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      setIsAuthenticated(!!user);
-    });
-
-    return () => unsubscribe();
-  }, []);
+  const [isAuthenticated, setIsAuthenticated] = useState(true)
 
   return (
     <section>
       <div className="max-w-2xl mx-auto">
         <nav className="border-gray-200">
           <div className="container mx-auto flex flex-wrap items-center justify-between">
-            <a href="#" className="flex">
               <svg
                 className="h-10 mr-3"
                 width="51"
@@ -50,8 +39,7 @@ function NavBar() {
                   </clipPath>
                 </defs>
               </svg>
-              <Link to={"/"}><span className="self-center text-lg font-semibold whitespace-nowrap">FilmFizz</span></Link>
-            </a>
+             <Link to="/menu"><p className="self-center text-lg font-semibold whitespace-nowrap">FilmFizz</p></Link> 
             <button
               data-collapse-toggle="mobile-menu"
               type="button"
@@ -89,13 +77,12 @@ function NavBar() {
               <div className="hidden md:block w-full md:w-auto" id="mobile-menu">
                 <ul className="flex-col md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:text-sm md:font-medium">
                   <li>
-                    <a
-                      href="#"
+                    <Link to={"/my-events"}><p
                       className="bg-blue-700 md:bg-transparent text-white block pl-3 pr-4 py-2 md:text-blue-700 md:p-0 rounded focus:outline-none"
                       aria-current="page"
                     >
                       Home
-                    </a>
+                    </p></Link>
                   </li>
                   <li>
                     <a

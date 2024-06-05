@@ -1,5 +1,5 @@
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { StaffContext } from '../contexts/StaffContext'
 
@@ -10,6 +10,7 @@ const [uid, setUid] = useState("")
 const { staff, logoutStaff } = useContext(StaffContext)
 
 const navigate = useNavigate()
+
 
 const handleLogout = (e) => {
   e.preventDefault()
@@ -23,13 +24,20 @@ const handleLogout = (e) => {
    })
 }
 
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        setUid(user.uid)
-    } else {
-        // user signed out
-    }
-})
+ useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUid(user.uid);
+        console.log(user.uid, ' is user');
+      } else {
+        console.log('logged out');
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <section>
