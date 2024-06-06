@@ -28,9 +28,8 @@ const handleLogout = (e) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUid(user.uid);
-        console.log(user.uid, ' is user');
       } else {
-        console.log('logged out');
+        // user logged out
       }
     });
 
