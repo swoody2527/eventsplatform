@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState, useContext } from 'react'
 import {
   Disclosure,
   DisclosureButton,
@@ -10,21 +10,60 @@ import {
   Transition,
 } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { StaffContext } from '../contexts/StaffContext'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
-const navigation = [
-  { name: 'Home', href: '#', current: true },
-  { name: 'My Events', href: '#', current: false },
-  { name: 'Browse Events', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Example() {
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [navigation, setNavigation] = useState([])
+  const { staff } = useContext(StaffContext)
+  const auth = getAuth()
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuthenticated(true)
+      } else {
+        setIsAuthenticated(false)
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [auth]);
+
+  useEffect(() => {
+    if (staff) {
+      setNavigation([
+        { name: 'Menu', href: '/menu', current: false },
+        { name: 'Manage Events', href: '/manage-events', current: true},
+        { name: 'Create New Event', href: '/create-event', current: false},
+        { name: 'Calender', href: '/calender', current: false}
+      ])
+    } else if (isAuthenticated) {
+      setNavigation([
+        { name: 'Menu', href: '/menu', current: true },
+        { name: 'My Events', href: '/my-events', current: false},
+        { name: 'Browse Events', href: '/browse-events', current: false},
+        { name: 'Calendar', href: '/my-calender', current: false}
+      ])
+    } else {
+      setNavigation([])
+    }
+  }, [isAuthenticated, staff])
+
+  
+
+
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-purple-600">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -43,11 +82,8 @@ export default function Example() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
+                  <p className='text-3xl '>FilmFizz</p>
+    
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
@@ -68,14 +104,7 @@ export default function Example() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+               
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">

@@ -17,6 +17,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.btn {
+  @apply bg-purple-600 rounded-lg p-2;
+}
 
 /* body {
   margin: 0;
