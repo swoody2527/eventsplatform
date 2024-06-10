@@ -11,7 +11,8 @@ import {
 } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { StaffContext } from '../contexts/StaffContext'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 
 function classNames(...classes) {
@@ -22,8 +23,9 @@ export default function Example() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [navigation, setNavigation] = useState([])
-  const { staff } = useContext(StaffContext)
+  const { staff, logoutStaff } = useContext(StaffContext)
   const auth = getAuth()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -43,13 +45,13 @@ export default function Example() {
     if (staff) {
       setNavigation([
         { name: 'Menu', href: '/menu', current: false },
-        { name: 'Manage Events', href: '/manage-events', current: true},
+        { name: 'Manage Events', href: '/manage-events', current: false},
         { name: 'Create New Event', href: '/create-event', current: false},
         { name: 'Calender', href: '/calender', current: false}
       ])
     } else if (isAuthenticated) {
       setNavigation([
-        { name: 'Menu', href: '/menu', current: true },
+        { name: 'Menu', href: '/menu', current: false },
         { name: 'My Events', href: '/my-events', current: false},
         { name: 'Browse Events', href: '/browse-events', current: false},
         { name: 'Calendar', href: '/my-calender', current: false}
@@ -58,6 +60,18 @@ export default function Example() {
       setNavigation([])
     }
   }, [isAuthenticated, staff])
+
+  const handleLogout = (e) => {
+    e.preventDefault()
+    logoutStaff()
+     signOut(auth)
+     .then(() => {
+      navigate("/")
+     })
+     .catch((error) => {
+      console.log(error)
+     })
+  }
 
   
 
@@ -82,7 +96,8 @@ export default function Example() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <p className='text-3xl '>FilmFizz</p>
+                  { isAuthenticated ? <Link to="/menu"><p className='text-3xl'>FilmFizz</p></Link> : 
+                  <Link to="/"><p className='text-3xl'>FilmFizz</p></Link>}
     
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
@@ -151,6 +166,7 @@ export default function Example() {
                       <MenuItem>
                         {({ focus }) => (
                           <a
+                            onClick={handleLogout}
                             href="#"
                             className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
