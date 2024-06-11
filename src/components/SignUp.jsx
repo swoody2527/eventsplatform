@@ -38,12 +38,12 @@ function SignUp() {
   return (
     <section>
         <h1>One step closer...</h1>
-        <form onSubmit={handleSignUp}>
+        <form className='flex flex-col items-center' onSubmit={handleSignUp}>
             <input type='email' value={email} placeholder='Email' onChange={(e) => setEmail(e.target.value)}></input>
-            <input type='password' value={password} placeholder='Password' onChange={(e) => setPassword(e.target.value)}></input>
-            <input type='password' value={passwordConfirmation} placeholder='Confirm Password' onChange={(e) => setPasswordConfirmation(e.target.value)}></input>
+            <input className='mt-3' type='password' value={password} placeholder='Password' onChange={(e) => setPassword(e.target.value)}></input>
+            <input className='mt-3' type='password' value={passwordConfirmation} placeholder='Confirm Password' onChange={(e) => setPasswordConfirmation(e.target.value)}></input>
             {password != passwordConfirmation ? <p>Passwords don't match</p> : null}
-            <button disabled={password !== passwordConfirmation || isCreating ? true : false} type='submit'>{isCreating ? "Creating..." : "Create My Account"}</button>
+            <button className='btn mt-3' disabled={password !== passwordConfirmation || isCreating ? true : false} type='submit'>{isCreating ? "Creating..." : "Create My Account"}</button>
         </form>
         {error ? <p> {error.message} </p> : null}
         {isSuccess ? <p>Account Created. You're all set!</p> : null}

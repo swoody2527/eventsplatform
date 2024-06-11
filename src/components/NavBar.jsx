@@ -57,7 +57,9 @@ export default function Example() {
         { name: 'Calendar', href: '/my-calender', current: false}
       ])
     } else {
-      setNavigation([])
+      setNavigation([{
+        name: 'Log In', href: '/authenticate', current: true
+      }])
     }
   }, [isAuthenticated, staff])
 
@@ -122,6 +124,7 @@ export default function Example() {
                
 
                 {/* Profile dropdown */}
+                { isAuthenticated ? 
                 <Menu as="div" className="relative ml-3">
                   <div>
                     <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -129,7 +132,7 @@ export default function Example() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fpngtree.com%2Fso%2Fplaceholder&psig=AOvVaw2kl6izpPcB71I_Yf5_Zz2c&ust=1718149481100000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPjR0OGb0oYDFQAAAAAdAAAAABAK"
                         alt=""
                       />
                     </MenuButton>
@@ -176,7 +179,7 @@ export default function Example() {
                       </MenuItem>
                     </MenuItems>
                   </Transition>
-                </Menu>
+                </Menu> : null}
               </div>
             </div>
           </div>

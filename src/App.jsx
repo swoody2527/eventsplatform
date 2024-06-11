@@ -13,6 +13,7 @@ import StaffSignIn from './components/StaffSignIn.jsx'
 import Menu from './components/Menu.jsx'
 import NavBar from './components/NavBar.jsx'
 import MyEvents from './components/MyEvents.jsx'
+import CreateEvent from './components/CreateEvent.jsx'
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         <Route path='/authenticate-staff' element={<StaffSignIn/>}></Route>
         <Route path='/menu' element={<Menu/>}></Route>
         <Route path='/my-events' element={<MyEvents/>}></Route>
+        <Route path='/create-event' element={<CreateEvent/>}></Route>
       </Routes>
     </main>
   )
