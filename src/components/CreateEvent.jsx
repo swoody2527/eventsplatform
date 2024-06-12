@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import app from "../firebase.js"
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { set } from 'firebase/database';
 
 function CreateEvent() {
   const [eventName, setEventName] = useState('');
@@ -8,6 +9,10 @@ function CreateEvent() {
   const [date, setDate] = useState('');
   const [category, setCategory] = useState('');
   const [price, setPrice] = useState(0);
+  
+  const [isCreating, setIsCreating] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState(false)
 
   const db = getFirestore(app)
 
@@ -15,6 +20,8 @@ function CreateEvent() {
     event.preventDefault();
 
     try {
+      setSuccess(false)
+      setIsCreating(true)
       const docRef = await addDoc(collection(db, "events"), {
         name: eventName,
         desc: eventDescription,
@@ -29,9 +36,15 @@ function CreateEvent() {
         setDate('')
         setCategory('')
         setPrice(0)
+        setIsCreating(false)
+        setSuccess(true)
+        setError(false)
       
     } catch (error) {
       console.log(error)
+      setError(error)
+      setIsCreating(false)
+      setSuccess(false)
       
     }
 
@@ -55,7 +68,8 @@ function CreateEvent() {
           onChange={(event) => setEventDescription(event.target.value)}
         />
         <input
-          className='mt-3'
+          type='datetime-local'
+          className='mt-3 bg-black'
           placeholder='Date'
           value={date}
           onChange={(event) => setDate(event.target.value)}
@@ -74,11 +88,14 @@ function CreateEvent() {
           className='mt-3 bg-black'
           placeholder='Price'
           value={price}
-          onChange={(event) => setPrice(event.target.value)}
+          onChange={(event) => setPrice(Number(event.target.value))}
         />
         </div>
-        <button className='btn mt-3'>Create Event</button>
+        <button disabled={isCreating} className='btn mt-3'>{isCreating ? "Creating Event..." : "Create Event"}</button>
       </form>
+      {success ? <p>Event Created!</p> : null}
+      {error ? <p>{error}</p> : null}
+      {}
     </section>
   );
 }

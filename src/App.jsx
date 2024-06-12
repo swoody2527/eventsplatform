@@ -14,6 +14,7 @@ import Menu from './components/Menu.jsx'
 import NavBar from './components/NavBar.jsx'
 import MyEvents from './components/MyEvents.jsx'
 import CreateEvent from './components/CreateEvent.jsx'
+import BrowseEvents from './components/BrowseEvents.jsx'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Route path='/menu' element={<Menu/>}></Route>
         <Route path='/my-events' element={<MyEvents/>}></Route>
         <Route path='/create-event' element={<CreateEvent/>}></Route>
+        <Route path='/browse-events' element={<BrowseEvents />}></Route>
       </Routes>
     </main>
   )
