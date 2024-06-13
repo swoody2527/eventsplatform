@@ -21,6 +21,10 @@
   @apply bg-purple-600 rounded-lg p-2;
 }
 
+.btn:hover {
+  @apply bg-purple-900;
+}
+
 /* body {
   margin: 0;
   display: flex;
