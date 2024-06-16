@@ -57,7 +57,7 @@ function SignUp() {
         </form>
         {error ? <p> {error.message} </p> : null}
         {isSuccess ? <p>Account Created. You're all set!</p> : null}
-        {isSuccess ? <Link to="/authenticate"><button>Log In</button></Link> : null}
+        {isSuccess ? <Link to="/authenticate"><button className='btn'>Log In</button></Link> : null}
     </section>
   )
 }

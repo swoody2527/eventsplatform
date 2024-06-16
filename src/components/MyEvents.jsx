@@ -124,7 +124,6 @@ const MyEvents = () => {
         <LoadingSpinner />
       ) : (
         <div>
-          <p>{uid}</p>
           <h1 className="text-3xl font-bold mb-4">You're currently signed up for these events</h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {userEvents.map((event) => (
