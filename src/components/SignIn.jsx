@@ -32,8 +32,8 @@ function SignIn() {
     <section>
     <h1 className='text-5xl'>Welcome Back!</h1>
     <form className='flex flex-col items-center' onSubmit={handleLogin}>
-        <input value={email} placeholder='email' onChange={(e) => setEmail(e.target.value)}></input>
-        <input className='m-3' value={password} placeholder='password'onChange={(e) => setPassword(e.target.value)}></input>
+        <input className="m-3 bg-black text-2xl text-center" value={email} placeholder='Email' onChange={(e) => setEmail(e.target.value)}></input>
+        <input className='m-3 bg-black text-2xl text-center' value={password} placeholder='Password'onChange={(e) => setPassword(e.target.value)}></input>
         <Button className="btn" type='submit'>Log In</Button>
     </form>
     {error ? <p>{error}</p> : null}

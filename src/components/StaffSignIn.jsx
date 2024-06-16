@@ -48,8 +48,8 @@ function StaffSignIn() {
     <section className='my-auto'>
     <h1 className='text-3xl'>Staff Log In</h1>
     <form className='flex flex-col items-center mt' onSubmit={handleStaffLogin}>
-        <input className='mt-3 rounded-md text-center' value={email} placeholder='Email' onChange={(e) => setEmail(e.target.value)}></input>
-        <input className='m-3 rounded-md text-center' value={password} placeholder='Password'onChange={(e) => setPassword(e.target.value)}></input>
+        <input className='input-basic' value={email} placeholder='Email' onChange={(e) => setEmail(e.target.value)}></input>
+        <input className='input-basic' value={password} placeholder='Password'onChange={(e) => setPassword(e.target.value)}></input>
         <button className='btn' type='submit'>Log In</button>
     </form>
     {error ? <p>{error}</p> : null}

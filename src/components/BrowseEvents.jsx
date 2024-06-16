@@ -21,9 +21,9 @@ function BrowseEvents() {
   return (
     <div>
       {events.map((event) => (
-        <div className='flex flex-row justify-center' >
+        <div key={event.id}  className='flex flex-row justify-center' >
         <section className='bg-black border-2 border-purple-500 mt-2 w-1/2'>
-            <div key={event.id}>{event.name ? event.name : "No Name"}</div>
+            <div >{event.name ? event.name : "No Name"}</div>
             <div>{event.desc ? event.desc : "No desc"}</div>
             <div>{event.time ? event.time : "No time"}</div>
             <Link to={`/browse-events/${event.id}`} className='btn'>Sign Up</Link>

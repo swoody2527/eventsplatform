@@ -56,26 +56,26 @@ function CreateEvent() {
     <section>
       <form className='flex flex-col items-center' onSubmit={handleSubmit}>
         <input
-          className='mt-3'
+          className='input-basic'
           placeholder='Event Name'
           value={eventName}
           onChange={(event) => setEventName(event.target.value)}
         />
         <input
-          className='mt-3'
+          className='input-basic'
           placeholder='Event Description'
           value={eventDescription}
           onChange={(event) => setEventDescription(event.target.value)}
         />
         <input
           type='datetime-local'
-          className='mt-3 bg-black'
+          className='input-basic bg-black'
           placeholder='Date'
           value={date}
           onChange={(event) => setDate(event.target.value)}
         />
         <input
-          className='mt-3'
+          className='input-basic'
           placeholder='Category'
           value={category}
           onChange={(event) => setCategory(event.target.value)}
@@ -85,7 +85,7 @@ function CreateEvent() {
         
         type='number'
         min={0}
-          className='mt-3 bg-black'
+          className='input-basic'
           placeholder='Price'
           value={price}
           onChange={(event) => setPrice(Number(event.target.value))}
