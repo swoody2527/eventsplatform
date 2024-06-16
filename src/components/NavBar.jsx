@@ -47,14 +47,14 @@ export default function Example() {
         { name: 'Menu', href: '/menu', current: false },
         { name: 'Manage Events', href: '/manage-events', current: false},
         { name: 'Create New Event', href: '/create-event', current: false},
-        { name: 'Calender', href: '/calender', current: false}
+        
       ])
     } else if (isAuthenticated) {
       setNavigation([
         { name: 'Menu', href: '/menu', current: false },
         { name: 'My Events', href: '/my-events', current: false},
         { name: 'Browse Events', href: '/browse-events', current: false},
-        { name: 'Calendar', href: '/my-calender', current: false}
+        
       ])
     } else {
       setNavigation([{

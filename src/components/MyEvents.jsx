@@ -3,11 +3,13 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { initGoogleApi } from '../googleApi.js'; 
 import { gapi } from 'gapi-script';
+import LoadingSpinner from './LoadingSpinner.jsx';
 
 const UserSignedEvents = () => {
   const [userEvents, setUserEvents] = useState([]);
   const [uid, setUid] = useState("");
   const [isGoogleUser, setIsGoogleUser] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   const auth = getAuth();
   const db = getFirestore();
@@ -42,19 +44,24 @@ const UserSignedEvents = () => {
                 }
               }));
               setUserEvents(eventsData.filter(event => event !== null));
+              setIsLoading(false)
             } else {
               setUserEvents([]);
+              setIsLoading(false)
             }
           } else {
             setUserEvents([]);
+            setIsLoading(false)
           }
         } catch (error) {
           console.error('Error fetching user document:', error);
           setUserEvents([]);
+          setIsLoading(false)
         }
       } else {
         setUid("");
         setUserEvents([]);
+        setIsLoading(false)
       }
     });
 
@@ -113,6 +120,9 @@ const UserSignedEvents = () => {
 
   return (
     <div>
+      {isLoading ? <LoadingSpinner></LoadingSpinner> :
+
+      <div>
       <p>{uid}</p>
       <h1>You're currently signed up for these events</h1>
       <ul>
@@ -129,6 +139,12 @@ const UserSignedEvents = () => {
           </div>
         ))}
       </ul>
+      </div>
+      
+      
+      
+      }
+      
     </div>
   );
 };
