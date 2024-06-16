@@ -41,15 +41,18 @@ const handleLogout = (e) => {
 
   return (
     <section className='flex flex-col items-center'>
-    <div>Welcome! {uid}</div>
+      
+    <h1 className='text-5xl'>{staff ? "Staff Hub" : "Welcome Back"}</h1>
+    <Link to={"/my-events"}><button className='btn text-5xl'>My Events</button></Link>
+    <Link to={"/browse-events"}><button className='btn text-5xl'>Browse Events</button></Link>
+
 
     { /* Staff Options */}
-    {staff ? <p>You are staff!</p> : null}
-    {staff ? <Link to="/create-event"><button className='btn'>Create New Event</button></Link> : null}
+    {staff ? <Link to="/create-event"><button className='btn text-5xl'>Create New Event</button></Link> : null}
 
 
 
-    <button className='btn mt-3' onClick={handleLogout}>Log Out</button>
+    <button className='btn mt-3 text text-5xl' onClick={handleLogout}>Log Out</button>
     </section>
 
   )

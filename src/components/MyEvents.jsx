@@ -119,34 +119,35 @@ const UserSignedEvents = () => {
   };
 
   return (
-    <div>
-      {isLoading ? <LoadingSpinner></LoadingSpinner> :
-
-      <div>
-      <p>{uid}</p>
-      <h1>You're currently signed up for these events</h1>
-      <ul>
-        {userEvents.map((event) => (
-          <div key={event.id} className='flex flex-row justify-center'>
-            <section className='bg-black border-2 border-purple-500 mt-2 w-1/2'>
-              <div>{event.name ? event.name : "No Name"}</div>
-              <div>{event.desc ? event.desc : "No Description"}</div>
-              <div>{event.date ? new Date(event.date).toLocaleString() : "No Date"}</div>
-
-              {isGoogleUser ? <button className='btn' onClick={() => handleCalendarInsert(event)}>+ Google Calendar</button> : null }
-              
-            </section>
+    <div className="container mx-auto p-4">
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <div>
+          <p>{uid}</p>
+          <h1 className="text-3xl font-bold mb-4">You're currently signed up for these events</h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {userEvents.map((event) => (
+              <div key={event.id} className="flex flex-col justify-between rounded-lg overflow-hidden shadow-xl shadow-black border-2 border-purple-600">
+                <img src="https://placehold.co/300" alt="Event" className="w-full h-48 object-cover object-center" />
+                <div className="p-4">
+                  <h2 className="text-xl font-bold mb-2">{event.name ? event.name : "No Name"}</h2>
+                  <p className="text-white mb-2">{event.desc ? event.desc : "No Description"}</p>
+                  <p className="text-white mb-2">{event.date ? new Date(event.date).toLocaleString() : "No Date"}</p>
+                  {isGoogleUser && (
+                    <button className="btn bg-purple-500 text-white px-4 py-2" onClick={() => handleCalendarInsert(event)}>
+                      Add To Google Calendar
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </ul>
-      </div>
-      
-      
-      
-      }
-      
+        </div>
+      )}
     </div>
   );
+  
 };
 
 export default UserSignedEvents;

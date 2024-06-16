@@ -27,6 +27,7 @@ function CreateEvent() {
         name: eventName,
         desc: eventDescription,
         date: date,
+        location: eventLocation,
         category: category,
         price: price,
         participants: [] 
@@ -34,6 +35,7 @@ function CreateEvent() {
         console.log("Document written with ID: ", docRef.id);
         setEventName('')
         setEventDescription('')
+        setEventLocation('')
         setDate('')
         setCategory('')
         setPrice(0)

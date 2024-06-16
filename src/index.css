@@ -18,7 +18,7 @@
 }
 
 .btn {
-  @apply bg-purple-600 rounded-lg p-2;
+  @apply bg-purple-600 rounded-lg p-2 mt-3;
 }
 
 .btn:hover {
@@ -29,6 +29,9 @@
   @apply m-3 bg-black text-2xl text-center
 }
 
+.event-card {
+  @apply rounded-lg overflow-hidden shadow-xl shadow-black border-2 border-purple-600
+}
 /* body {
   margin: 0;
   display: flex;
