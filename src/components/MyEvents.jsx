@@ -5,7 +5,7 @@ import { initGoogleApi } from '../googleApi.js';
 import { gapi } from 'gapi-script';
 import LoadingSpinner from './LoadingSpinner.jsx';
 
-const UserSignedEvents = () => {
+const MyEvents = () => {
   const [userEvents, setUserEvents] = useState([]);
   const [uid, setUid] = useState("");
   const [isGoogleUser, setIsGoogleUser] = useState(false)
@@ -150,4 +150,4 @@ const UserSignedEvents = () => {
   
 };
 
-export default UserSignedEvents;
+export default MyEvents;
