@@ -9,6 +9,8 @@ function EventSignUp() {
   const auth = getAuth()
   const [uid, setUid] = useState("")
 
+  const [isSigningUp, setIsSigningUp] = useState(false)
+
   const db = getFirestore(app)
 
   useEffect(() => {
@@ -34,9 +36,8 @@ function EventSignUp() {
 
       await updateDoc(usersRef, {
         "signed-events": arrayUnion(eventId)
-
-
       })
+
     } catch (error) {
       console.error("Error signing up to event: ", error);
     }

@@ -6,6 +6,7 @@ import { set } from 'firebase/database';
 function CreateEvent() {
   const [eventName, setEventName] = useState('');
   const [eventDescription, setEventDescription] = useState('');
+  const [eventLocation, setEventLocation] = useState("")
   const [date, setDate] = useState('');
   const [category, setCategory] = useState('');
   const [price, setPrice] = useState(0);
@@ -67,6 +68,12 @@ function CreateEvent() {
           value={eventDescription}
           onChange={(event) => setEventDescription(event.target.value)}
         />
+        <input
+        className='input-basic'
+        placeholder='Location'
+        value={eventLocation}
+        onChange={(event) => setEventLocation(event.target.value)}
+         />
         <input
           type='datetime-local'
           className='input-basic bg-black'
