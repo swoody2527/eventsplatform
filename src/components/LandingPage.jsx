@@ -11,29 +11,32 @@ function LandingPage() {
 
   const handleGoogleLogin = () => {
     signInWithPopup(auth, provider)
-  .then((result) => {
-    
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    
-    const user = result.user;
-    
-    setDoc(doc(db, "users", user.uid), {
-      "signed-events": [],
-      "google-user": true
-  })
-    navigate("/menu")
-    
-  }).catch((error) => {
-    
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    
-    const email = error.customData.email;
-    
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    
-  });
+      .then(async (result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+  
+        const userDocRef = doc(db, "users", user.uid);
+  
+        const userDoc = await getDoc(userDocRef);
+  
+        if (!userDoc.exists()) {
+          await setDoc(userDocRef, {
+            "signed-events": [],
+            "google-user": true
+          });
+        }
+  
+        navigate("/menu");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+  
+
+      });
   }
   return (
     <section>

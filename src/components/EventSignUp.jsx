@@ -48,6 +48,7 @@ function EventSignUp() {
       await updateDoc(usersRef, {
         'signed-events': arrayUnion(eventId),
       });
+      alert("Successfully signed up!")
       setIsSigningUp(false);
       setError(null);
     } catch (error) {

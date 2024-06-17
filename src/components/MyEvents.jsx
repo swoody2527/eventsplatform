@@ -10,6 +10,7 @@ const MyEvents = () => {
   const [uid, setUid] = useState("");
   const [isGoogleUser, setIsGoogleUser] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [isAdding, setIsAdding] = useState(false)
 
   const auth = getAuth();
   const db = getFirestore();
@@ -70,6 +71,7 @@ const MyEvents = () => {
 
   const handleCalendarInsert = async (event) => {
     try {
+      setIsAdding(true)
       const user = auth.currentUser;
       if (user) {
         
@@ -109,6 +111,7 @@ const MyEvents = () => {
           } else {
             console.log('Event created: ', response.htmlLink);
             alert(`Event created: ${response.htmlLink}`);
+            setIsAdding(false)
           }
         });
       }
@@ -134,8 +137,8 @@ const MyEvents = () => {
                   <p className="text-white mb-2">{event.desc ? event.desc : "No Description"}</p>
                   <p className="text-white mb-2">{event.date ? new Date(event.date).toLocaleString() : "No Date"}</p>
                   {isGoogleUser && (
-                    <button className="btn bg-purple-500 text-white px-4 py-2" onClick={() => handleCalendarInsert(event)}>
-                      Add To Google Calendar
+                    <button disabled={isAdding} className="btn bg-purple-500 text-white px-4 py-2" onClick={() => handleCalendarInsert(event)}>
+                      {isAdding? "Adding..." : "Add To Google Calendar"}
                     </button>
                   )}
                 </div>
