@@ -36,10 +36,15 @@ These are the development dependencies required to build, lint, and test the app
 - **[vite](https://vitejs.dev/)**:
 
 
-A .env file must be created in th src folder in order to connect to database and authentication services.
+A .env file must be created in the src folder in order to connect to database and authentication services.
 Please copy and paste the environmental variables that have been provided.
 
-The programme should now be ready to run using *npm run dev*
+The programme should now be ready to run using *npm run dev*.
+
+A staff account for testing is:
+
+bigboss@eventstaff.com
+bigboss12345?
 
 
 
